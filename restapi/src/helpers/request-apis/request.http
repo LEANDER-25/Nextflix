@@ -1,0 +1,37 @@
+####
+POST http://localhost:3000/api/auth/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "vantuan01@gmail.com",
+    "password": "Nextflix123@"
+}
+
+#fail -> 400
+#success -> 200 with user info
+
+###
+
+POST http://localhost:3000/api/auth/register HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "Phunghung29",
+    "email": "phunghung29@gmail.com",
+    "password": "Nextflix123@"
+}
+
+#fail -> 400
+#success -> 201 with user data
+
+###
+
+GET http://localhost:3000/api/demo/get2 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiI2MjVlYWNmMjNkZjkyMDgwNmRlMGFlNGUiLCJ1c2VybmFtZSI6IlZhblR1YW4wMSIsImVtYWlsIjoidmFudHVhbjAxQGdtYWlsLmNvbSIsImlhdCI6MTY1MDU0MTA2NiwiZXhwIjoxNjUwNTQyODY2fQ.2xW-_i7IcDQ2uerbtL6M_WmmO57x3zuml8ygXOUVkfU
+
+###
+
+GET http://localhost:3000/api/demo/get HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiI2MjVlYWNmMjNkZjkyMDgwNmRlMGFlNGUiLCJ1c2VybmFtZSI6IlZhblR1YW4wMSIsImVtYWlsIjoidmFudHVhbjAxQGdtYWlsLmNvbSIsImlhdCI6MTY1MDU0MDM5MiwiZXhwIjoxNjUwNTQyMTkyfQ.yXmPi_VJ9sXEcOnJTXiEQDPbOPQscSnE17QY397Kwsg
+
+###

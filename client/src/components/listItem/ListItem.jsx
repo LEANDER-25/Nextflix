@@ -18,7 +18,7 @@ export default function ListItem({ index, item }) {
       try {
         const res = await axios.get("/movies/find/" + item, {
           headers: {
-            token:
+            Authorization:
             "Bearer "+JSON.parse(localStorage.getItem("user")).accessToken,
           },
         });

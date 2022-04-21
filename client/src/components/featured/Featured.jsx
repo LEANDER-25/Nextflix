@@ -11,7 +11,7 @@ export default function Featured({ type, setGenre }) {
       try {
         const res = await axios.get(`/movies/random?type=${type}`, {
           headers: {
-            token:
+            Authorization:
               "Bearer "+JSON.parse(localStorage.getItem("user")).accessToken,
           },
         });
