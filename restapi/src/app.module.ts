@@ -9,8 +9,8 @@ import * as Joi from 'joi';
 import { DemoController } from './controllers/users/demo.controller';
 import { MovieModule } from './modules/movie/movie.module';
 import { DriveAPIConfig } from './configurations/drive-api.config';
-import { DriveServiceModule } from './drive-service/drive-service.module';
 import { MyDriveModule } from './my-drive/my-drive.module';
+import { ListModule } from './modules/list/list.module';
 
 @Module({
   imports: [
@@ -26,7 +26,7 @@ import { MyDriveModule } from './my-drive/my-drive.module';
     AuthModule,
     UserModule,
     MovieModule,
-    DriveServiceModule,
+    ListModule,
     MyDriveModule
   ],
   controllers: [AppController, DemoController],
