@@ -10,9 +10,9 @@ This project uses whole UI from [Youtube clone repository](https://github.com/sa
 
 The server side is rewritten by me with NestJS framework.
 
-## Technical
+## Technique
 
-### UI
+### Frontend
 
 SPA - ReactJS, HTML/CSS, JavaScript
 
