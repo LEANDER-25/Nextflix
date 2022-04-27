@@ -7,8 +7,10 @@ import { UserModule } from './modules/user/user.module';
 import { ConfigModule } from '@nestjs/config';
 import * as Joi from 'joi';
 import { DemoController } from './controllers/users/demo.controller';
-import { RolesGuard } from './middlewares/guards/auth/role.guard';
-import { APP_GUARD } from '@nestjs/core';
+import { MovieModule } from './modules/movie/movie.module';
+import { DriveAPIConfig } from './configurations/drive-api.config';
+import { DriveServiceModule } from './drive-service/drive-service.module';
+import { MyDriveModule } from './my-drive/my-drive.module';
 
 @Module({
   imports: [
@@ -19,9 +21,13 @@ import { APP_GUARD } from '@nestjs/core';
         JWT_ACCESS_EXPIRED: Joi.string().required(),
         JWT_REFRESH_EXPIRED: Joi.string().required(),
       }),
+      load: [DriveAPIConfig]
     }),
     AuthModule,
     UserModule,
+    MovieModule,
+    DriveServiceModule,
+    MyDriveModule
   ],
   controllers: [AppController, DemoController],
   providers: [AppService],

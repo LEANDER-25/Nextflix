@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { CreateUserDto } from 'src/dtos/user/create-user.dto';
 import * as bcrypt from 'bcrypt';
-import { User, UserDocument } from 'src/models/user.schema';
+import { User, UserDocument } from 'src/models/user/user.schema';
 import { IllegalInformationError } from 'src/helpers/errors/iIllegal-information-error';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
@@ -36,13 +36,17 @@ export class AuthService {
   async authUser(email: string, password: string) {
     try {
       const user = await this.userService.findOneByEmail(email);
+      console.log('authUser');      
       console.log(user);
+      console.log('and user id:');
+      console.log(user._id.toString());
+      
       await this.verifyPassword(password, user.password);
       user.password = undefined;
       const token = await this.generateToken(user);
       return {
         user: {
-          _id: user._id,
+          _id: user._id.toString(),
           username: user.username,
           email: user.email,
         },
@@ -70,9 +74,9 @@ export class AuthService {
     }
   }
 
-  async generateToken(user: User) {
+  async generateToken(user: UserDocument) {
     const payload = {
-      userid: user._id,
+      userid: user._id.toString(),
       username: user.username,
       email: user.email,
     };

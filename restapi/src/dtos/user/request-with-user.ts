@@ -1,8 +1,8 @@
 import { Request } from "express";
-import { User } from "src/models/user.schema";
+import { User, UserDocument } from "src/models/user/user.schema";
 
 interface RequestWithUser extends Request {
-    user: User;
+    user: UserDocument;
 }
 
 export default RequestWithUser;

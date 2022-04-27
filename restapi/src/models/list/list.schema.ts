@@ -1,6 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import mongoose from 'mongoose';
 import { Document } from 'mongoose';
-import { Movie } from './movie.schema';
+import { Movie } from '../movie/movie.schema';
 
 export type ListDocument = List & Document;
 
@@ -17,7 +18,7 @@ export class List {
   @Prop()
   genre: string;
 
-  @Prop([Movie])
+  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Movie' }] })
   content: Movie[];
 }
 
