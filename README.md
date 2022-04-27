@@ -12,7 +12,7 @@ The server side is rewritten by me with NestJS framework.
 
 ## Technique
 
-### UI
+### Frontend
 
 SPA - ReactJS, HTML/CSS, JavaScript
 
