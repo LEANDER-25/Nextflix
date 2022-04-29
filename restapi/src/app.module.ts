@@ -11,6 +11,7 @@ import { MovieModule } from './modules/movie/movie.module';
 import { DriveAPIConfig } from './configurations/drive-api.config';
 import { MyDriveModule } from './my-drive/my-drive.module';
 import { ListModule } from './modules/list/list.module';
+import { MulterModule } from '@nestjs/platform-express';
 
 @Module({
   imports: [
