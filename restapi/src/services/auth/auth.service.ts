@@ -85,4 +85,8 @@ export class AuthService {
     console.log(`token: ${token}`);
     return token;
   }
+
+  generateClientID(user: User, userAgent: string) {
+
+  }
 }

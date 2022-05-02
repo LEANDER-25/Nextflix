@@ -1,5 +1,6 @@
 import {
   Controller,
+  Delete,
   Get,
   Post,
   Req,
@@ -56,15 +57,19 @@ export class DemoController {
   async uploadMediaFile(@UploadedFile() file: Express.Multer.File) {
     try {
       console.log(file);
-      await this.driveService.uploadFile(file, {
-        name: '7308086d80c1508bf66db7e82ab800fe',
-        mediaType: file.mimetype,
-        size: file.size,
-        type: FileType.Movie,
-      });
+      await this.driveService.uploadFile(file, 'nothing', FileType.Series);
     } catch (error) {
       console.error(error);
+      console.log(file.filename);
       await this.driveService.removeTempFile(file.filename);
+    }
+  }
+  @Delete('delete')
+  async deleteFile() {
+    try {
+      await this.driveService.removeCloudFile('16KiIRHFV0uJsK0RMV-incrwO8DMTQdkM');
+    } catch (error) {
+      console.error(error);
     }
   }
 }
