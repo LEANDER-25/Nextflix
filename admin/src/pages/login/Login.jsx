@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { login } from "../../context/authContext/apiCalls";
+import { loginStart } from "../../context/authContext/AuthActions";
 import { AuthContext } from "../../context/authContext/AuthContext";
 import "./login.css";
 
@@ -10,6 +11,9 @@ export default function Login() {
 
   const handleLogin = (e) => {
     e.preventDefault();
+    // alert('In Login')
+    // dispatch(loginStart())
+    console.log(`${email} and ${password}`);
     login({ email, password }, dispatch);
   };
 

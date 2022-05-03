@@ -22,9 +22,19 @@ export default function Register() {
     setPassword(passwordRef.current.value);
     setUsername(usernameRef.current.value);
     try {
-      await axios.post("auth/register", { email,username, password });
+      const res = await axios.post("auth/register", {
+        email,
+        username,
+        password,
+      });
+      console.log("response of register");
+      console.log(res);
       history.push("/login");
-    } catch (err) {}
+    } catch (err) {
+      console.log(err.response.data);
+      console.log(err.response.status);
+      console.log(err.response.headers);
+    }
   };
   return (
     <div className="register">

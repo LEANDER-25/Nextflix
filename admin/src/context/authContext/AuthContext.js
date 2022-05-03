@@ -1,4 +1,5 @@
 import AuthReducer from "./AuthReducer";
+import { loginStart } from "./AuthActions";
 import { createContext, useEffect, useReducer } from "react";
 
 const INITIAL_STATE = {
@@ -14,6 +15,7 @@ export const AuthContextProvider = ({ children }) => {
 
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(state.user));
+    // dispatch(loginStart());
   }, [state.user]);
 
   return (

@@ -23,6 +23,7 @@ export class AuthService {
       registered.password = undefined;
       return registered;
     } catch (error) {
+      console.log('Register Service Error');
       console.error(error);
       // console.log(error.name);
       // console.log(error.message);

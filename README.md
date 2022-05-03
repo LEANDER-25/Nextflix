@@ -23,3 +23,7 @@ RESTful API - NestJS framework
 ### Database
 
 NoSQL - MongoDB
+
+### Third-Party
+
+File Storage - Google Drive API

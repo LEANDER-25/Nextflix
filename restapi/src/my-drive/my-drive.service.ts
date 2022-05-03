@@ -56,9 +56,9 @@ export interface CustomResponse {
 
 @Injectable()
 export class MyDriveService {
-  drive: drive_v3.Drive;
+  private drive: drive_v3.Drive;
 
-  folders: object;
+  private folders: object;
 
   constructor(
     private configService: ConfigService,
@@ -100,7 +100,7 @@ export class MyDriveService {
    * @param fileId
    * @returns
    */
-  async #getFileViewUrl(fileId: string) {
+  async getFileViewUrl(fileId: string) {
     const fileViewUrl = await this.drive.files.get({
       fileId,
       fields: 'webViewLink',
@@ -123,7 +123,6 @@ export class MyDriveService {
     file: Express.Multer.File,
     uploadFileInfo: UploadFileInfo,
   ) {
-
     //Get Id of destiny cloud folder
     const folderId = this.#getDestUploadFolder(uploadFileInfo.type);
 
@@ -144,7 +143,7 @@ export class MyDriveService {
     console.log('upload success');
     await this.removeTempFile(file.filename);
     console.log(uploaded.data);
-    return await this.#getFileViewUrl(uploaded.data.id);
+    return await this.getFileViewUrl(uploaded.data.id);
   }
 
   async #refreshAccessToken() {
@@ -299,10 +298,10 @@ export class MyDriveService {
 
   /**
    * Method used to upload chunks array. With a mission: Upload forever until all successfully, it will join into recursion.
-   * @param chunks 
-   * @param uploadInfo 
-   * @param resumableUrl 
-   * @returns 
+   * @param chunks
+   * @param uploadInfo
+   * @param resumableUrl
+   * @returns
    */
   async #resumableChunksUpload(
     chunks: Array<ChunkFSElement>,
@@ -367,9 +366,8 @@ export class MyDriveService {
     );
     if (res.status === 200) {
       await this.removeTempFile(file.filename);
-      return await this.#getFileViewUrl(res.data.id);
-    }
-    else {
+      return await this.getFileViewUrl(res.data.id);
+    } else {
       throw new UploadFileFailError();
     }
   }
@@ -397,6 +395,11 @@ export class MyDriveService {
     }
   }
 
+  /**
+   * Method used to remove (unlink) cloud file, using file id, return 1 for success and 0 for fail
+   * @param fileIdOrViewLink 
+   * @returns 
+   */
   async removeCloudFile(fileIdOrViewLink: string) {
     if (
       fileIdOrViewLink.includes('https') ||
@@ -434,6 +437,27 @@ export class MyDriveService {
     } catch (error) {
       console.log(error);
       return false;
+    }
+  }
+
+  getFileType(rawType: string) {
+    switch (rawType) {
+      case FileType.Avatar:
+        return FileType.Avatar;
+      case FileType.Background:
+        return FileType.Background;
+      case FileType.Image:
+        return FileType.Image;
+      case FileType.ImageTitle:
+        return FileType.ImageTitle;
+      case FileType.Movie:
+        return FileType.Movie;
+      case FileType.Trailer:
+        return FileType.Trailer;
+      case FileType.Series:
+        return FileType.Series;
+      default:
+        throw new OutOfRangeError();
     }
   }
 }

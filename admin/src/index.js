@@ -15,5 +15,6 @@ ReactDOM.render(
       </MovieContextProvider>
     </AuthContextProvider>
   </React.StrictMode>,
+  // <App/>,
   document.getElementById("root")
 );

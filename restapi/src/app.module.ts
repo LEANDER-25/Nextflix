@@ -12,6 +12,7 @@ import { DriveAPIConfig } from './configurations/drive-api.config';
 import { MyDriveModule } from './my-drive/my-drive.module';
 import { ListModule } from './modules/list/list.module';
 import { MulterModule } from '@nestjs/platform-express';
+import { FileModule } from './modules/file/file.module';
 
 @Module({
   imports: [
@@ -28,7 +29,8 @@ import { MulterModule } from '@nestjs/platform-express';
     UserModule,
     MovieModule,
     ListModule,
-    MyDriveModule
+    MyDriveModule,
+    FileModule
   ],
   controllers: [AppController, DemoController],
   providers: [AppService],
