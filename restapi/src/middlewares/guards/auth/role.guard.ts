@@ -32,6 +32,7 @@ export class RolesGuard implements CanActivate {
       return false;
     }
 
+<<<<<<< HEAD
     console.log(`Request contain User`);
 
     let userRole: 1|0;
@@ -45,6 +46,11 @@ export class RolesGuard implements CanActivate {
     return requiredRoles.some(role => {
       const temp = role === Role.Admin ? 1 : 0;
       return userRole === temp;
+=======
+    return requiredRoles.some(role => {
+      const temp = role === Role.Admin ? true : false;
+      return user.isAdmin === temp;
+>>>>>>> b48fc4c83d1a18c178229637b09bbb2f872d94fe
     });
   }
 }

@@ -372,6 +372,7 @@ export class MyDriveService {
     }
   }
 
+<<<<<<< HEAD
   #convertDefaultLinkToDisplayAbleLink(webViewLink: string, type: FileType) {
     switch (type) {
       case FileType.Avatar:
@@ -398,24 +399,38 @@ export class MyDriveService {
       let res: drive_v3.Schema$File;
       if (file.size > smallSize) {
         res = await this.#uploadResumable(file, {
+=======
+  async uploadFile(file: Express.Multer.File, name: string, type: FileType) {
+    const smallSize = 25 * 1024 * 1024;
+    try {
+      if (file.size > smallSize) {
+        return await this.#uploadResumable(file, {
+>>>>>>> b48fc4c83d1a18c178229637b09bbb2f872d94fe
           name,
           mediaType: file.mimetype,
           size: file.size,
           type,
         });
       } else {
+<<<<<<< HEAD
         res = await this.#uploadMultipart(file, {
+=======
+        return await this.#uploadMultipart(file, {
+>>>>>>> b48fc4c83d1a18c178229637b09bbb2f872d94fe
           name,
           mediaType: file.mimetype,
           size: file.size,
           type,
         });
       }
+<<<<<<< HEAD
       res.webViewLink = this.#convertDefaultLinkToDisplayAbleLink(
         res.webViewLink,
         type,
       );
       return res;
+=======
+>>>>>>> b48fc4c83d1a18c178229637b09bbb2f872d94fe
     } catch (error) {
       throw error;
     }
@@ -423,8 +438,13 @@ export class MyDriveService {
 
   /**
    * Method used to remove (unlink) cloud file, using file id, return 1 for success and 0 for fail
+<<<<<<< HEAD
    * @param fileIdOrViewLink
    * @returns
+=======
+   * @param fileIdOrViewLink 
+   * @returns 
+>>>>>>> b48fc4c83d1a18c178229637b09bbb2f872d94fe
    */
   async removeCloudFile(fileIdOrViewLink: string) {
     if (

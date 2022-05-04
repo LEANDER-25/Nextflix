@@ -32,7 +32,11 @@ const App = () => {
             <Route path="/series">
               <Home type="series" />
             </Route>
+<<<<<<< HEAD
             <Route path="/watch/:id">
+=======
+            <Route path="/watch">
+>>>>>>> b48fc4c83d1a18c178229637b09bbb2f872d94fe
               <Watch />
             </Route>
           </>

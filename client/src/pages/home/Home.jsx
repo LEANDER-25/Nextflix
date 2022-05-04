@@ -18,7 +18,11 @@ const Home = ({ type }) => {
           }`,
           {
             headers: {
+<<<<<<< HEAD
               Authorization:
+=======
+              token:
+>>>>>>> b48fc4c83d1a18c178229637b09bbb2f872d94fe
               "Bearer "+JSON.parse(localStorage.getItem("user")).accessToken,
             },
           }
@@ -26,8 +30,11 @@ const Home = ({ type }) => {
         setLists(res.data);
       } catch (err) {
         console.log(err);
+<<<<<<< HEAD
         console.log(err.response.data);
         console.log(err.response.data.message);
+=======
+>>>>>>> b48fc4c83d1a18c178229637b09bbb2f872d94fe
       }
     };
     getRandomLists();

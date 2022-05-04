@@ -34,6 +34,11 @@ lerna-debug.log*
 !.vscode/launch.json
 !.vscode/extensions.json
 
+<<<<<<< HEAD
+=======
+#env
+.env
+>>>>>>> b48fc4c83d1a18c178229637b09bbb2f872d94fe
 
 #upload folder
 /uploads
