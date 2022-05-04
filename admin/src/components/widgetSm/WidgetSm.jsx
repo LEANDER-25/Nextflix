@@ -18,15 +18,12 @@ export default function WidgetSm() {
         setNewUsers(res.data);
       } catch (err) {
         console.log(err);
-<<<<<<< HEAD
         const statusCode = err.response.status
         console.log(statusCode);
         if (statusCode === 401) {
           localStorage.removeItem("user");
           window.location.href = '/login'
         }
-=======
->>>>>>> b48fc4c83d1a18c178229637b09bbb2f872d94fe
       }
     };
     getNewUsers();

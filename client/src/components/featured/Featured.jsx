@@ -1,16 +1,12 @@
 import { InfoOutlined, PlayArrow } from "@material-ui/icons";
 import axios from "axios";
 import { useEffect, useState } from "react";
-<<<<<<< HEAD
 import { useHistory } from "react-router-dom";
-=======
->>>>>>> b48fc4c83d1a18c178229637b09bbb2f872d94fe
 import "./featured.scss";
 
 export default function Featured({ type, setGenre }) {
   const [content, setContent] = useState({});
 
-<<<<<<< HEAD
 const history = useHistory();
 
   useEffect(() => {
@@ -22,11 +18,6 @@ const history = useHistory();
         else {
           type = 'series';
         }
-=======
-  useEffect(() => {
-    const getRandomContent = async () => {
-      try {
->>>>>>> b48fc4c83d1a18c178229637b09bbb2f872d94fe
         const res = await axios.get(`/movies/random?type=${type}`, {
           headers: {
             Authorization:
@@ -74,11 +65,7 @@ const history = useHistory();
         <img src={content.imgTitle} alt="" />
         <span className="desc">{content.desc}</span>
         <div className="buttons">
-<<<<<<< HEAD
           <button className="play" onClick={() => history.push('/watch')}>
-=======
-          <button className="play">
->>>>>>> b48fc4c83d1a18c178229637b09bbb2f872d94fe
             <PlayArrow />
             <span>Play</span>
           </button>

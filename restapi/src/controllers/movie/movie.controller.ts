@@ -18,10 +18,7 @@ import { Roles } from 'src/services/auth/role.annotaion';
 import { Role } from 'src/services/auth/role.enum';
 import { MovieService } from 'src/services/movie/movie.service';
 import { DeleteResult } from 'mongodb';
-<<<<<<< HEAD
 import { NullPointerError } from 'src/helpers/errors/null-pointer-error';
-=======
->>>>>>> b48fc4c83d1a18c178229637b09bbb2f872d94fe
 
 @Controller('movies')
 @UseGuards(JwtAuthGuard, RolesGuard)
@@ -121,11 +118,7 @@ export class MovieController {
       return randomMovies;
     } catch (error) {
       console.error(error);
-<<<<<<< HEAD
       if (error.name === 'NullPointerError' || error == NullPointerError) {
-=======
-      if (error.name === 'NotFoundError') {
->>>>>>> b48fc4c83d1a18c178229637b09bbb2f872d94fe
         throw new HttpException('Can not find the movie', HttpStatus.NOT_FOUND);
       }
       throw new HttpException(
