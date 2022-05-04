@@ -16,7 +16,7 @@ import { FileModule } from './modules/file/file.module';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost:27017/nextflix'),
+    MongooseModule.forRoot('mongodb+srv://m001-student:m001-mongodb-basics@sandbox.1kxex.mongodb.net/nextflix?retryWrites=true&w=majority'),
     ConfigModule.forRoot({
       validationSchema: Joi.object({
         JWT_SECRET_KEY: Joi.string().required(),
