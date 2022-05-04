@@ -24,6 +24,7 @@ export default function MovieList() {
       headerName: "Movie",
       width: 200,
       renderCell: (params) => {
+        console.log(params.row.img)
         return (
           <div className="productListItem">
             <img className="productListImg" src={params.row.img} alt="" />

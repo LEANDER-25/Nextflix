@@ -120,6 +120,7 @@ export class UserController {
   @Roles(Role.Admin)
   async getAllUsers(@Req() req: RequestWithUser) {
     const sortNewest = req.query.new === undefined ?? false;
+    console.log(`In UserController > getAllUser > new=${sortNewest}`);
 
     try {
       return sortNewest

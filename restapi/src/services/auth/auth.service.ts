@@ -50,6 +50,7 @@ export class AuthService {
           _id: user._id.toString(),
           username: user.username,
           email: user.email,
+          isAdmin: user.isAdmin
         },
         accessToken: token,
       };
