@@ -1,5 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import mongoose from 'mongoose';
 import { Document } from 'mongoose';
+import { Series } from '../series/series.schema';
 
 export type MovieDocument = Movie & Document;
 
@@ -39,6 +41,9 @@ export class Movie {
 
   @Prop({default: false})
   isSeries: boolean;
+
+  @Prop({ type: { type: mongoose.Schema.Types.ObjectId, ref: 'Series' } })
+  series: Series;
 }
 
 export const MovieSchema = SchemaFactory.createForClass(Movie);
