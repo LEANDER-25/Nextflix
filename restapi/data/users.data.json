@@ -1,0 +1,86 @@
+[
+  {
+    "username": "Nghi28",
+    "email": "nghi28@gmail.com",
+    "password": "$2a$10$F.ZaQp60My3e9M4Nff./G.9UT6RRaB2W0AFJ4zqSg1Ze9kS9la9kq",
+    "isAdmin": true,
+    "profilePic": ""
+  },
+  {
+    "username": "VanTuan01",
+    "email": "vantuan01@gmail.com",
+    "password": "$2a$10$F.ZaQp60My3e9M4Nff./G.9UT6RRaB2W0AFJ4zqSg1Ze9kS9la9kq",
+    "isAdmin": true,
+    "profilePic": ""
+  },
+  {
+    "username": "HoangTuBongDem",
+    "email": "nguyenvana@gmail.com",
+    "password": "$2a$10$F.ZaQp60My3e9M4Nff./G.9UT6RRaB2W0AFJ4zqSg1Ze9kS9la9kq",
+    "isAdmin": false,
+    "profilePic": ""
+  },
+  {
+    "username": "XaoXuyenKoNgung456",
+    "email": "hothixuyen@gmail.com",
+    "password": "$2a$10$F.ZaQp60My3e9M4Nff./G.9UT6RRaB2W0AFJ4zqSg1Ze9kS9la9kq",
+    "isAdmin": false,
+    "profilePic": ""
+  },
+  {
+    "username": "BillBlack",
+    "email": "billyblack@gmail.com",
+    "password": "$2a$10$F.ZaQp60My3e9M4Nff./G.9UT6RRaB2W0AFJ4zqSg1Ze9kS9la9kq",
+    "isAdmin": false,
+    "profilePic": ""
+  },
+  {
+    "username": "DemonOfNight",
+    "email": "alexavyn@gmail.com",
+    "password": "$2a$10$F.ZaQp60My3e9M4Nff./G.9UT6RRaB2W0AFJ4zqSg1Ze9kS9la9kq",
+    "isAdmin": false,
+    "profilePic": ""
+  },
+  {
+    "username": "Lynx",
+    "email": "lynxasmr@gmail.com",
+    "password": "$2a$10$F.ZaQp60My3e9M4Nff./G.9UT6RRaB2W0AFJ4zqSg1Ze9kS9la9kq",
+    "isAdmin": false,
+    "profilePic": ""
+  },
+  {
+    "username": "SugarTank",
+    "email": "lehoangbaohiie@gmail.com",
+    "password": "$2a$10$F.ZaQp60My3e9M4Nff./G.9UT6RRaB2W0AFJ4zqSg1Ze9kS9la9kq",
+    "isAdmin": false,
+    "profilePic": ""
+  },
+  {
+    "username": "vuduclong",
+    "email": "vuduclonghiie@gmail.com",
+    "password": "$2a$10$F.ZaQp60My3e9M4Nff./G.9UT6RRaB2W0AFJ4zqSg1Ze9kS9la9kq",
+    "isAdmin": false,
+    "profilePic": ""
+  },
+  {
+    "username": "trandinhtrung510",
+    "email": "trandinhtrung510@gmail.com",
+    "password": "$2a$10$F.ZaQp60My3e9M4Nff./G.9UT6RRaB2W0AFJ4zqSg1Ze9kS9la9kq",
+    "isAdmin": false,
+    "profilePic": ""
+  },
+  {
+    "username": "theibruhhh",
+    "email": "theibr1551@gmail.com",
+    "password": "$2a$10$F.ZaQp60My3e9M4Nff./G.9UT6RRaB2W0AFJ4zqSg1Ze9kS9la9kq",
+    "isAdmin": false,
+    "profilePic": ""
+  },
+  {
+    "username": "QuyLeLmao",
+    "email": "hoangtrongkienhiie@gmail.com",
+    "password": "$2a$10$F.ZaQp60My3e9M4Nff./G.9UT6RRaB2W0AFJ4zqSg1Ze9kS9la9kq",
+    "isAdmin": false,
+    "profilePic": ""
+  }
+]
