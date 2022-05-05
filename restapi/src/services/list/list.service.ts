@@ -3,13 +3,27 @@ import { InjectModel } from '@nestjs/mongoose';
 import { CreateListDto } from 'src/dtos/list/create-list.dto';
 import { List, ListDocument } from 'src/models/list/list.schema';
 import { Model } from 'mongoose';
+import * as md5 from 'md5';
+import { MovieGenre, MovieGenreDocument } from 'src/models/movie/movie-genre.schema';
 
 @Injectable()
 export class ListService {
-  constructor(@InjectModel(List.name) private listModel: Model<ListDocument>) {}
+  constructor(
+    @InjectModel(List.name) private listModel: Model<ListDocument>,
+    @InjectModel(MovieGenre.name) private movieGenreModel: Model<MovieGenreDocument>
+    ) {}
 
   async create(createListDto: CreateListDto) {
-    const createList = new this.listModel(createListDto);
+    const now  = new Date();
+    const findGenre = await this.movieGenreModel.findOne({genre: createListDto.genre}).exec();
+    const newList: List = {
+      listId: md5(now),
+      genre: findGenre,
+      title: createListDto.title,
+      type: createListDto.type,
+      content: createListDto.content
+    }
+    const createList = new this.listModel(newList);
     return createList.save();
   }
 

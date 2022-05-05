@@ -5,4 +5,5 @@ export class CreateMovieDto {
   limit: number;
   genre: string;
   isSeries: boolean;
+  series: string;
 }

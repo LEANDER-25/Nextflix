@@ -65,7 +65,7 @@ const history = useHistory();
         <img src={content.imgTitle} alt="" />
         <span className="desc">{content.desc}</span>
         <div className="buttons">
-          <button className="play" onClick={() => history.push('/watch')}>
+          <button className="play" onClick={() => history.push(`/watch/${content.id}`)}>
             <PlayArrow />
             <span>Play</span>
           </button>

@@ -5,11 +5,17 @@ import { Model } from 'mongoose';
 import { NullPointerError } from 'src/helpers/errors/null-pointer-error';
 import { NotFoundError } from 'src/helpers/errors/not-found-error';
 import { CreateMovieDto } from 'src/dtos/movie/create-movie.dto';
+import {
+  MovieGenre,
+  MovieGenreDocument,
+} from 'src/models/movie/movie-genre.schema';
 
 @Injectable()
 export class MovieService {
   constructor(
     @InjectModel(Movie.name) private movieModel: Model<MovieDocument>,
+    @InjectModel(MovieGenre.name)
+    private movieGenreModel: Model<MovieGenreDocument>,
   ) {}
 
   async findAll() {
@@ -21,7 +27,7 @@ export class MovieService {
   }
 
   async findOneById(id: string) {
-    const movie = await this.movieModel.findById(id).exec();
+    const movie = await this.movieModel.findOne({ movieId: id }).exec();
     if (!movie) {
       throw new NotFoundError();
     }
@@ -32,7 +38,7 @@ export class MovieService {
    * NEW CREATE LOGIC
    * -------------------------------------------------------------
    * create empty document of movie with movie name and desc in db
-   * * create the array of objects: store 
+   * * create the array of objects: store
    * * * {<attribute_in_model>: <file>, <media_type>: <string>, <size_in_byte>: <double>}
    * * * { image: "86.jpg", mediaType: "image/jpg", size: 5000000}
    * upload files( trailer, images, video) to Google Drive
@@ -41,8 +47,16 @@ export class MovieService {
    * get view link of each file
    * update the document( add missing link to rest attributes)
    * find and return the updated document
-  **/
+   **/
   async create(createMovieDto: CreateMovieDto) {
+    const genre = await this.movieGenreModel
+      .findOne({ genre: createMovieDto.genre })
+      .exec();
+    if (!genre) {
+      throw new NotFoundError('Not Found Genre');
+    }
+    createMovieDto.genre = genre._id.toString();
+
     const createMovie = new this.movieModel(createMovieDto);
     return createMovie.save();
   }

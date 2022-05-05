@@ -57,13 +57,9 @@ export class DemoController {
   async uploadMediaFile(@UploadedFile() file: Express.Multer.File) {
     try {
       console.log(file);
-<<<<<<< HEAD
       const res = await this.driveService.uploadFile(file, 'nothing', FileType.Series);
       console.log(res.webViewLink);
       
-=======
-      await this.driveService.uploadFile(file, 'nothing', FileType.Series);
->>>>>>> b48fc4c83d1a18c178229637b09bbb2f872d94fe
     } catch (error) {
       console.error(error);
       console.log(file.filename);
