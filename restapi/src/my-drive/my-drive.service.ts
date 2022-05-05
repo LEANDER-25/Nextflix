@@ -422,7 +422,7 @@ export class MyDriveService {
       );
       return {
         fileLink: res.webViewLink,
-        type: this.getFileType(type)
+        type: this.getLinkType(type)
       };
     } catch (error) {
       throw error;
