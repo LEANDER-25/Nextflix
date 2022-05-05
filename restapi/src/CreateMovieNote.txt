@@ -1,0 +1,51 @@
+B1. Gửi 1 request có body:
+{
+ title, desc, year, limit, genre, isSeries
+}
+
+//img: file, imgTttle: file, background: file, trailer: file, video: file
+
+*server: tạo movie theo request số 1
+*server trả về response:
+{
+ movieId
+}
+
+B2. client nhận dc movieId
+client sẽ tạo 1 array, mỗi thành phần của array sẽ có thông tin như sau:
+FILE: mimeType, origin name, size, ...
+img: image
+...
+verify:
+nếu mà movie là series
+ type: TYPE.series
+type: TYPE.movie
+uploadMovieFile = [
+ {  file: FILE,  movieId: movieId,  type: TYPE.image },
+ {  file: FILE,  movieId: movieId,  type: TYPE.imgTitle },
+ {  file: FILE,  movieId: movieId,  type: TYPE.background },
+ {  file: FILE,  movieId: movieId,  type: TYPE.trailer },
+ {  file: FILE,  movieId: movieId,  type: ... }
+]
+
+client gửi từng file trong array lên server
+
+*server nhận file và upload lên cloud
+*server sẽ trả về đường link có thể xem dc cho client
+
+B3. client nhận dc response chứa link và lưu vào 1 array có tên là
+  storeUploadedFileLinkRespone = [
+ {   link: LINK, type:  },
+ {   link: LINK, type:  },
+ {   link: LINK, type:  },
+ {   link: LINK, type:  },
+ {   link: LINK, type:  }
+]
+
+tạo 1 cái object = {
+ img: '...', imgTitle: '...', imgSm: '...', trailer: '...', video: '...'
+}
+
+ghép từng link vào attribute 
+
+
