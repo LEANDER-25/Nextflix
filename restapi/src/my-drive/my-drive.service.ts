@@ -54,6 +54,11 @@ export interface CustomResponse {
   data?: any | null;
 }
 
+export interface FileLinkRes {
+  fileLink: string;
+  type: string;
+}
+
 @Injectable()
 export class MyDriveService {
   private drive: drive_v3.Drive;
@@ -392,7 +397,7 @@ export class MyDriveService {
     return webViewLink;
   }
 
-  async uploadFile(file: Express.Multer.File, name: string, type: FileType) {
+  async uploadFile(file: Express.Multer.File, name: string, type: FileType): Promise<FileLinkRes> {
     const smallSize = 25 * 1024 * 1024;
     try {
       let res: drive_v3.Schema$File;
@@ -415,7 +420,10 @@ export class MyDriveService {
         res.webViewLink,
         type,
       );
-      return res;
+      return {
+        fileLink: res.webViewLink,
+        type: this.getFileType(type)
+      };
     } catch (error) {
       throw error;
     }
@@ -482,6 +490,27 @@ export class MyDriveService {
         return FileType.Trailer;
       case FileType.Series:
         return FileType.Series;
+      default:
+        throw new OutOfRangeError();
+    }
+  }
+
+  getLinkType(type: FileType) {
+    switch (type) {
+      case FileType.Avatar:
+        return 'profilePic';
+      case FileType.Background:
+        return 'imgSm';
+      case FileType.Image:
+        return 'img';
+      case FileType.ImageTitle:
+        return 'imgTitle';
+      case FileType.Movie:
+        return 'video';
+      case FileType.Trailer:
+        return 'trailer';
+      case FileType.Series:
+        return 'video';
       default:
         throw new OutOfRangeError();
     }

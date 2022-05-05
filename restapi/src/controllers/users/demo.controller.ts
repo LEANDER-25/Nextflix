@@ -15,7 +15,7 @@ import { JwtAuthGuard } from 'src/middlewares/guards/auth/jwt-auth.guard';
 import { RolesGuard } from 'src/middlewares/guards/auth/role.guard';
 import { Roles } from 'src/services/auth/role.annotaion';
 import { Role } from 'src/services/auth/role.enum';
-import { DriveAPIConfig } from 'src/configurations/drive-api.config';
+import * as md5 from 'md5';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { MyDriveService } from 'src/my-drive/my-drive.service';
 import { FileType } from 'src/models/movie/file-type.enum';
@@ -58,7 +58,7 @@ export class DemoController {
     try {
       console.log(file);
       const res = await this.driveService.uploadFile(file, 'nothing', FileType.Series);
-      console.log(res.webViewLink);
+      console.log(res.fileLink);
       
     } catch (error) {
       console.error(error);
@@ -74,4 +74,10 @@ export class DemoController {
       console.error(error);
     }
   }
+
+  @Get('md5')
+  async getMd5(){
+    return md5(new Date());
+  }
+
 }

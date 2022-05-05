@@ -22,44 +22,27 @@ export default function NewMovie() {
 
   const upload = (items) => {
     items.forEach((item) => {
-      const fileName = new Date().getTime() + item.label + item.file.name;
-      const uploadTask = storage.ref(`/items/${fileName}`).put(item.file);
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          const progress =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log("Upload is " + progress + "% done");
-        },
-        (error) => {
-          console.log(error);
-        },
-        () => {
-          uploadTask.snapshot.ref.getDownloadURL().then((url) => {
-            setMovie((prev) => {
-              return { ...prev, [item.label]: url };
-            });
-            setUploaded((prev) => prev + 1);
-          });
-        }
-      );
+      
     });
   };
 
-  const handleUpload = (e) => {
-    e.preventDefault();
+  const handleUpload = (movieId, isSeries) => {
+    const videoType = isSeries === true ? "series" : "movie";
     upload([
-      { file: img, label: "img" },
-      { file: imgTitle, label: "imgTitle" },
-      { file: imgSm, label: "imgSm" },
-      { file: trailer, label: "trailer" },
-      { file: video, label: "video" },
+      { name: movieId, file: img, type: "image" },
+      { name: movieId, file: imgTitle, type: "imgTitle" },
+      { name: movieId, file: imgSm, type: "background" },
+      { name: movieId, file: trailer, type: "trailer" },
+      { name: movieId, file: video, type: videoType },
     ]);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    createMovie(movie, dispatch);
+    console.log("🚀 ~ file: NewMovie.jsx ~ line 61 ~ handleSubmit ~ movie", movie)
+    const movieId = await createMovie(movie, dispatch);
+    console.log("🚀 ~ file: NewMovie.jsx ~ line 63 ~ handleSubmit ~ resBody", movieId)
+    // handleUpload(movieId, movie.isSeries);
   };
 
   return (
@@ -170,15 +153,15 @@ export default function NewMovie() {
             onChange={(e) => setVideo(e.target.files[0])}
           />
         </div>
-        {uploaded === 5 ? (
-          <button className="addProductButton" onClick={handleSubmit}>
-            Create
-          </button>
+        <button className="addProductButton" onClick={handleSubmit}>
+          Create
+        </button>
+        {/* {uploaded === 5 ? (
         ) : (
           <button className="addProductButton" onClick={handleUpload}>
             Upload
           </button>
-        )}
+        )} */}
       </form>
     </div>
   );

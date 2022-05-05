@@ -9,6 +9,7 @@ import {
   MovieGenre,
   MovieGenreDocument,
 } from 'src/models/movie/movie-genre.schema';
+import * as md5 from 'md5';
 
 @Injectable()
 export class MovieService {
@@ -55,20 +56,29 @@ export class MovieService {
     if (!genre) {
       throw new NotFoundError('Not Found Genre');
     }
-    createMovieDto.genre = genre._id.toString();
+    genre.movies = [];
+    const newMovie = {
+      movieId: md5(new Date()),
+      genre,
+      title: createMovieDto.title,
+      limit: createMovieDto.limit,
+      year: createMovieDto.year,
+      isSeries: createMovieDto.isSeries,
+      desc: createMovieDto.desc
+    }
 
-    const createMovie = new this.movieModel(createMovieDto);
+    const createMovie = new this.movieModel(newMovie);
     return createMovie.save();
   }
 
   async update(id: string, updateMovieDto: CreateMovieDto) {
-    const oldInfo = await this.movieModel.findById(id).exec();
+    const oldInfo = await this.movieModel.findOne({movieId: id}).exec();
     oldInfo.set(updateMovieDto);
     return oldInfo.save();
   }
 
   async delete(id: string) {
-    return await this.movieModel.deleteOne({ _id: id }).exec();
+    return await this.movieModel.deleteOne({ movieId: id }).exec();
   }
 
   async findRandom(isTypeSeries = false) {

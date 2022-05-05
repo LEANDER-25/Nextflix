@@ -1,4 +1,4 @@
-B1. Gửi 1 request có body:
+B1. admin gửi 1 request có body chứa thông tin cơ bản:
 {
  title, desc, year, limit, genre, isSeries
 }
@@ -11,8 +11,8 @@ B1. Gửi 1 request có body:
  movieId
 }
 
-B2. client nhận dc movieId
-client sẽ tạo 1 array, mỗi thành phần của array sẽ có thông tin như sau:
+B2. admin nhận dc movieId
+admin sẽ tạo 1 array, mỗi thành phần của array sẽ có thông tin như sau:
 FILE: mimeType, origin name, size, ...
 img: image
 ...
@@ -28,22 +28,22 @@ uploadMovieFile = [
  {  file: FILE,  movieId: movieId,  type: ... }
 ]
 
-client gửi từng file trong array lên server
+admin gửi từng file trong array lên server
 
 *server nhận file và upload lên cloud
 *server sẽ trả về đường link có thể xem dc cho client
 
-B3. client nhận dc response chứa link và lưu vào 1 array có tên là
+B3. admin nhận dc response chứa link và lưu vào 1 array có tên là
   storeUploadedFileLinkRespone = [
- {   link: LINK, type:  },
- {   link: LINK, type:  },
- {   link: LINK, type:  },
- {   link: LINK, type:  },
- {   link: LINK, type:  }
+ {   link: LINK, type: 'img' },
+ {   link: LINK, type: 'imgTitle' },
+ {   link: LINK, type: 'imgSm' },
+ {   link: LINK, type: 'trailer' },
+ {   link: LINK, type: 'video' }
 ]
 
 tạo 1 cái object = {
- img: '...', imgTitle: '...', imgSm: '...', trailer: '...', video: '...'
+ img: '', imgTitle: '', imgSm: '', trailer: '', video: ''
 }
 
 ghép từng link vào attribute 

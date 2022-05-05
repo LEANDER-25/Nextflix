@@ -19,6 +19,7 @@ import { Role } from 'src/services/auth/role.enum';
 import { MovieService } from 'src/services/movie/movie.service';
 import { DeleteResult } from 'mongodb';
 import { NullPointerError } from 'src/helpers/errors/null-pointer-error';
+import { NotFoundError } from 'src/helpers/errors/not-found-error';
 
 @Controller('movies')
 @UseGuards(JwtAuthGuard, RolesGuard)
@@ -34,6 +35,9 @@ export class MovieController {
       return created;
     } catch (error) {
       console.error(error);
+      if (error.name === 'NotFoundError' || error == NotFoundError) {
+        throw new HttpException(`${error.message}`, HttpStatus.BAD_REQUEST);
+      }
       throw new HttpException(
         'Error while creating new movie...',
         HttpStatus.INTERNAL_SERVER_ERROR,

@@ -18,19 +18,19 @@ export class Movie {
   @Prop()
   desc: string;
 
-  @Prop()
+  @Prop({default: ''})
   img: string;
 
-  @Prop()
+  @Prop({default: ''})
   imgTitle: string;
 
-  @Prop()
+  @Prop({default: ''})
   imgSm: string;
 
-  @Prop()
+  @Prop({default: ''})
   trailer: string;
 
-  @Prop()
+  @Prop({default: ''})
   video: string;
 
   @Prop()
