@@ -20,6 +20,7 @@ import { MovieService } from 'src/services/movie/movie.service';
 import { DeleteResult } from 'mongodb';
 import { NullPointerError } from 'src/helpers/errors/null-pointer-error';
 import { NotFoundError } from 'src/helpers/errors/not-found-error';
+import { CreateMovieDto } from 'src/dtos/movie/create-movie.dto';
 
 @Controller('movies')
 @UseGuards(JwtAuthGuard, RolesGuard)
@@ -29,9 +30,16 @@ export class MovieController {
   @Post()
   @Roles(Role.Admin)
   async create(@Req() req: RequestWithUser) {
+    const body = req.body;
+    console.log(
+      '🚀 ~ file: movie.controller.ts ~ line 34 ~ MovieController ~ create ~ body',
+      body,
+    );
+    if (!body) throw new HttpException('Empty payload', HttpStatus.BAD_REQUEST);
+    const newMovie: CreateMovieDto = body;
+
     try {
-      const body = req.body;
-      const created = await this.movieService.create(body);
+      const created = await this.movieService.create(newMovie);
       return created;
     } catch (error) {
       console.error(error);
@@ -141,6 +149,23 @@ export class MovieController {
       console.error(error);
       throw new HttpException(
         'Error while retrieving movies',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
+
+  @Get('genre/:id')
+  @Roles(Role.Admin, Role.User)
+  async findMoviesByGenre(@Param('id') id: string) {
+    try {
+      return await this.movieService.findByGenre(id);
+    } catch (error) {
+      console.error(error);
+      if (error.name === 'NotFoundError') {
+        throw new HttpException('Can not find the movie', HttpStatus.NOT_FOUND);
+      }
+      throw new HttpException(
+        'Error while finding movie',
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }

@@ -17,11 +17,6 @@ export class MovieGenre {
 
     @Prop({required: true})
     desc: string;
-
-    // @Prop({ type: [{type: mongoose.Schema.Types.ObjectId, ref: 'Movies'}]})
-    // movies: Movie[]
-    @Prop()
-    movies: Movie[]
 }
 
 export const MovieGenreSchema = SchemaFactory.createForClass(MovieGenre);

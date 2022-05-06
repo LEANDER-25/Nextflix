@@ -56,7 +56,6 @@ export class MovieService {
     if (!genre) {
       throw new NotFoundError('Not Found Genre');
     }
-    genre.movies = [];
     const newMovie = {
       movieId: md5(new Date()),
       genre,
@@ -97,5 +96,13 @@ export class MovieService {
     }
 
     return randomMovies;
+  }
+
+  async findByGenre(genreId: string) {
+    const list = await this.movieModel.find({genre: {genreId}}).exec();
+    if (!list || (Array.isArray(list) && list.length == 0)) {
+      throw new NotFoundError();
+    }
+    return list;
   }
 }

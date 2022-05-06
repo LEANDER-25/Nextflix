@@ -16,7 +16,7 @@ export class MovieGenreService {
   ) {}
 
   async findAll() {
-    const list = await this.movieGenreModel.find().exec();
+    const list = await this.movieGenreModel.find().sort({genre: 1}).exec();
     if (!list || (Array.isArray(list) && list.length == 0)) {
       throw new NullPointerError();
     }

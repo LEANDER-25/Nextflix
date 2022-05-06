@@ -14,12 +14,12 @@ import { Role } from 'src/services/auth/role.enum';
 import { MovieGenreService } from 'src/services/movie/movie-genre.service';
 
 @Controller('genres')
-@UseGuards(JwtAuthGuard, RolesGuard)
+// @UseGuards(JwtAuthGuard, RolesGuard)
 export class MovieGenreController {
   constructor(private movieGenreService: MovieGenreService) {}
 
   @Get()
-  @Roles(Role.Admin, Role.User)
+  // @Roles(Role.Admin, Role.User)
   async findAll() {
     try {
       const list = await this.movieGenreService.findAll();

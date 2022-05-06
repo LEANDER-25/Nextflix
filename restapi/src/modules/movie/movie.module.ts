@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
+import { MovieGenreController } from 'src/controllers/movie/movie-genre.controller';
 import { MovieController } from 'src/controllers/movie/movie.controller';
 import {
   MovieGenre,
@@ -17,7 +18,7 @@ import { MovieService } from 'src/services/movie/movie.service';
       { name: MovieGenre.name, schema: MovieGenreSchema }
     ]),
   ],
-  controllers: [MovieController],
+  controllers: [MovieController, MovieGenreController],
   providers: [MovieService, MovieGenreService],
   exports: [MongooseModule, MovieService, MovieGenreService],
 })
