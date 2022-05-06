@@ -21,8 +21,9 @@ export default function Watch() {
               "Bearer "+JSON.parse(localStorage.getItem("user")).accessToken,
           },
         });
-        console.log(res);
-        setWatch(res);
+        console.log("🚀 ~ file: Watch.jsx ~ line 24 ~ getRandomContent ~ res", res)
+        
+        setWatch(res.data);
       } catch (err) {
         console.log(err);
       }
@@ -39,7 +40,7 @@ export default function Watch() {
         </div>
       </Link>
       {/* <ReactPlayer width={100+'%'} height={100+'%'}  url='https://drive.google.com/file/d/1v6gn055vQjsYvosxxtWWDrHZOxHOCDpF/view?usp=drivesdk' /> */}
-      <iframe src="https://drive.google.com/file/d/1v6gn055vQjsYvosxxtWWDrHZOxHOCDpF/preview" className="video" allow="autoplay"></iframe>
+      <iframe src={`${watch?.video}`} className="video" allow="autoplay"></iframe>
     </div>
   );
 }

@@ -28,6 +28,12 @@ const Home = ({ type }) => {
         console.log(err);
         console.log(err.response.data);
         console.log(err.response.data.message);
+        const statusCode = err.response.status
+        console.log(statusCode);
+        if (statusCode === 401) {
+          localStorage.removeItem("user");
+          window.location.href = '/login'
+        }
       }
     };
     getRandomLists();

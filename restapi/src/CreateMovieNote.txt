@@ -10,6 +10,7 @@ B1. admin gửi 1 request có body chứa thông tin cơ bản:
 {
  movieId
 }
+>>>>>>>>>>>>>>>>>>>DONE
 
 B2. admin nhận dc movieId
 admin sẽ tạo 1 array, mỗi thành phần của array sẽ có thông tin như sau:
@@ -28,6 +29,8 @@ uploadMovieFile = [
  {  file: FILE,  movieId: movieId,  type: ... }
 ]
 
+>>>>>>>>>>>>>>>>>>>DONE
+
 admin gửi từng file trong array lên server
 
 *server nhận file và upload lên cloud
@@ -41,6 +44,8 @@ B3. admin nhận dc response chứa link và lưu vào 1 array có tên là
  {   link: LINK, type: 'trailer' },
  {   link: LINK, type: 'video' }
 ]
+
+>>>>>>>>>>>>>>>>>>>DONE
 
 tạo 1 cái object = {
  img: '', imgTitle: '', imgSm: '', trailer: '', video: ''

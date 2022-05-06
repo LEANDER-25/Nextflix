@@ -27,6 +27,12 @@ const history = useHistory();
         setContent(res.data[0]);
       } catch (err) {
         console.log(err);
+        const statusCode = err.response.status
+        console.log(statusCode);
+        if (statusCode === 401) {
+          localStorage.removeItem("user");
+          window.location.href = '/login'
+        }
       }
     };
     getRandomContent();
@@ -65,7 +71,7 @@ const history = useHistory();
         <img src={content.imgTitle} alt="" />
         <span className="desc">{content.desc}</span>
         <div className="buttons">
-          <button className="play" onClick={() => history.push(`/watch/${content.id}`)}>
+          <button className="play" onClick={() => history.push(`/watch/${content.movieId}`)}>
             <PlayArrow />
             <span>Play</span>
           </button>

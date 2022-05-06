@@ -1,8 +1,9 @@
 import { useContext, useState } from "react";
 import "./newMovie.css";
-import storage from "../../firebase";
+// import storage from "../../firebase";
 import { createMovie } from "../../context/movieContext/apiCalls";
 import { MovieContext } from "../../context/movieContext/MovieContext";
+import axios from "axios";
 
 export default function NewMovie() {
   const [movie, setMovie] = useState(null);
@@ -11,7 +12,8 @@ export default function NewMovie() {
   const [imgSm, setImgSm] = useState(null);
   const [trailer, setTrailer] = useState(null);
   const [video, setVideo] = useState(null);
-  const [uploaded, setUploaded] = useState(0);
+  // const [uploaded, setUploaded] = useState(0);
+  const [uploadedFileLinks, setUploadedFileLinks] = useState([]);
 
   const { dispatch } = useContext(MovieContext);
 
@@ -20,15 +22,83 @@ export default function NewMovie() {
     setMovie({ ...movie, [e.target.name]: value });
   };
 
-  const upload = (items) => {
-    items.forEach((item) => {
-      
+  const upload = async (items, movieId) => {
+    let count = 0;
+    items.forEach(async (item) => {
+      console.log(
+        "🚀 ~ file: NewMovie.jsx ~ line 25 ~ items.forEach ~ item",
+        item
+      );
+      const isUploaded = await uploadItem(item);
+      count += isUploaded;
     });
+
+    if (count === 5) {
+      return await updateMovieFileLink(movieId);
+    }
+    return null;
   };
 
-  const handleUpload = (movieId, isSeries) => {
+  const uploadItem = async (item) => {
+    try {
+      const res = await axios.post("files/upload", item, {
+        headers: {
+          Authorization:
+            "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+        },
+      });
+      console.log(
+        "🚀 ~ file: NewMovie.jsx ~ line 40 ~ uploadItem ~ res",
+        res.data
+      );
+      if (res.status === 201 || res.status === 200) {
+        uploadedFileLinks.push(res.data);
+        return 1;
+      } else {
+        return 0;
+      }
+    } catch (error) {
+      console.log(
+        "🚀 ~ file: NewMovie.jsx ~ line 49 ~ uploadItem ~ error",
+        error
+      );
+    }
+  };
+
+  const updateMovieFileLink = async (movieId) => {
+    try {
+      const temp = {
+        img: uploadedFileLinks[0].fileLink,
+        imgTitle: uploadedFileLinks[1].fileLink,
+        imgSm: uploadedFileLinks[2].fileLink,
+        trailer: uploadedFileLinks[3].fileLink,
+        video: uploadedFileLinks[4].fileLink,
+      };
+      const res = await axios.put(`movies/${movieId}`, temp, {
+        headers: {
+          Authorization:
+            "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+        },
+      });
+      console.log(
+        "🚀 ~ file: NewMovie.jsx ~ line 71 ~ updateMovieFileLink ~ res",
+        res
+      );
+      return {
+        data: res.data,
+        status: res.status,
+      };
+    } catch (error) {
+      console.log(
+        "🚀 ~ file: NewMovie.jsx ~ line 73 ~ updateMovieFileLink ~ error",
+        error
+      );
+    }
+  };
+
+  const handleUpload = async (movieId, isSeries) => {
     const videoType = isSeries === true ? "series" : "movie";
-    upload([
+    return await upload([
       { name: movieId, file: img, type: "image" },
       { name: movieId, file: imgTitle, type: "imgTitle" },
       { name: movieId, file: imgSm, type: "background" },
@@ -39,10 +109,23 @@ export default function NewMovie() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("🚀 ~ file: NewMovie.jsx ~ line 61 ~ handleSubmit ~ movie", movie)
+    console.log(
+      "🚀 ~ file: NewMovie.jsx ~ line 61 ~ handleSubmit ~ movie",
+      movie
+    );
     const movieId = await createMovie(movie, dispatch);
-    console.log("🚀 ~ file: NewMovie.jsx ~ line 63 ~ handleSubmit ~ resBody", movieId)
-    // handleUpload(movieId, movie.isSeries);
+    console.log(
+      "🚀 ~ file: NewMovie.jsx ~ line 63 ~ handleSubmit ~ resBody",
+      movieId
+    );
+
+    const res = await handleUpload(movieId, movie.isSeries);
+
+    if (res.status === 200 || res.status === 204) {
+      alert(`Create and Upload ${movie.title} successfully!`);
+    } else {
+      alert(`Error while creating and upload movie`);
+    }
   };
 
   return (
