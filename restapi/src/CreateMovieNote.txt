@@ -22,11 +22,11 @@ nếu mà movie là series
  type: TYPE.series
 type: TYPE.movie
 uploadMovieFile = [
- {  file: FILE,  movieId: movieId,  type: TYPE.image },
- {  file: FILE,  movieId: movieId,  type: TYPE.imgTitle },
- {  file: FILE,  movieId: movieId,  type: TYPE.background },
- {  file: FILE,  movieId: movieId,  type: TYPE.trailer },
- {  file: FILE,  movieId: movieId,  type: ... }
+ {  file: FILE,  name: movieId,  type: TYPE.image },
+ {  file: FILE,  name: movieId,  type: TYPE.imgTitle },
+ {  file: FILE,  name: movieId,  type: TYPE.background },
+ {  file: FILE,  name: movieId,  type: TYPE.trailer },
+ {  file: FILE,  name: movieId,  type: ... }
 ]
 
 >>>>>>>>>>>>>>>>>>>DONE
@@ -48,7 +48,7 @@ B3. admin nhận dc response chứa link và lưu vào 1 array có tên là
 >>>>>>>>>>>>>>>>>>>DONE
 
 tạo 1 cái object = {
- img: '', imgTitle: '', imgSm: '', trailer: '', video: ''
+ img: LINK, imgTitle: LINK, imgSm: LINK, trailer: LINK, video: LINK
 }
 
 ghép từng link vào attribute 

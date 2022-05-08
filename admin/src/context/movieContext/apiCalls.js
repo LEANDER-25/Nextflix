@@ -37,7 +37,10 @@ export const createMovie = async (movie, dispatch) => {
     });
     console.log(res);
     dispatch(createMovieSuccess(res.data));
-    return res.data.movieId;
+    return {
+      movieId: res.data.movieId,
+      status: res.status
+    };
   } catch (err) {
     console.log(err);
     console.log(err.response.status);

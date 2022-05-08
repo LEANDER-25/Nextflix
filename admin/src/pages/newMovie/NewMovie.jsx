@@ -13,7 +13,7 @@ export default function NewMovie() {
   const [trailer, setTrailer] = useState(null);
   const [video, setVideo] = useState(null);
   // const [uploaded, setUploaded] = useState(0);
-  const [uploadedFileLinks, setUploadedFileLinks] = useState([]);
+  var [uploadedFileLinks, setUploadedFileLinks] = useState([]);
 
   const { dispatch } = useContext(MovieContext);
 
@@ -31,28 +31,48 @@ export default function NewMovie() {
       );
       const isUploaded = await uploadItem(item);
       count += isUploaded;
+      console.log("🚀 ~ file: NewMovie.jsx ~ line 34 ~ items.forEach ~ count", count)
     });
 
-    if (count === 5) {
+    console.log(
+      "🚀 ~ file: NewMovie.jsx ~ line 38 ~ items.forEach ~ final count",
+      count
+    );
+
+    if (count == 5) {
       return await updateMovieFileLink(movieId);
     }
     return null;
   };
 
   const uploadItem = async (item) => {
+    const formData = new FormData();
+    formData.append("file", item.file);
+    formData.append("name", item.name);
+    formData.append("type", item.type);
+
     try {
-      const res = await axios.post("files/upload", item, {
+      const res = await axios.post("files/upload", formData, {
         headers: {
           Authorization:
             "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
         },
       });
+      console.log("🚀 ~ file: NewMovie.jsx ~ line 58 ~ uploadItem ~ res", res);
+      // console.log(
+      //   "🚀 ~ file: NewMovie.jsx ~ line 40 ~ uploadItem ~ res",
+      //   res.data
+      // );
       console.log(
-        "🚀 ~ file: NewMovie.jsx ~ line 40 ~ uploadItem ~ res",
-        res.data
+        "🚀 ~ file: NewMovie.jsx ~ line 64 ~ uploadItem ~ res.status",
+        res.status
       );
-      if (res.status === 201 || res.status === 200) {
-        uploadedFileLinks.push(res.data);
+      if (res.status === 201) {
+        console.log(' ~ file: NewMovie.jsx ~ line 58 ~ uploadItem ~ In IF');
+        uploadedFileLinks = res.data
+        setUploadedFileLinks(uploadedFileLinks);
+        console.log("🚀 ~ file: NewMovie.jsx ~ line 72 ~ uploadItem ~ uploadedFileLinks", uploadedFileLinks)
+        // uploadedFileLinks.push(res.data);
         return 1;
       } else {
         return 0;
@@ -113,13 +133,20 @@ export default function NewMovie() {
       "🚀 ~ file: NewMovie.jsx ~ line 61 ~ handleSubmit ~ movie",
       movie
     );
-    const movieId = await createMovie(movie, dispatch);
+    const result = await createMovie(movie, dispatch);
+
     console.log(
       "🚀 ~ file: NewMovie.jsx ~ line 63 ~ handleSubmit ~ resBody",
-      movieId
+      result.movieId
     );
 
-    const res = await handleUpload(movieId, movie.isSeries);
+    if (result.status !== 201) {
+      alert(`Create and Upload ${movie.title} cancelled!`);
+      return;
+    }
+
+    const res = await handleUpload(result.movieId, movie.isSeries);
+    console.log("🚀 ~ file: NewMovie.jsx ~ line 129 ~ handleSubmit ~ res", res);
 
     if (res.status === 200 || res.status === 204) {
       alert(`Create and Upload ${movie.title} successfully!`);

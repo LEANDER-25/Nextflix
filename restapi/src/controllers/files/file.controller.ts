@@ -48,9 +48,11 @@ export class FileController {
     @UploadedFile() file: Express.Multer.File,
     @Body() body: CreateMovieFileDto,
   ) {
+    console.log("~ file: file.controller.ts ~ FileController ~ uploadFile ~ body", body)
     try {
       const type = this.driveService.getFileType(body.type);
       const res = await this.driveService.uploadFile(file, body.name, type);
+      console.log("~ file: file.controller.ts ~ FileController ~ uploadFile ~ res", res)
       return res;
     } catch (error: Error | any) {
       console.error(error);

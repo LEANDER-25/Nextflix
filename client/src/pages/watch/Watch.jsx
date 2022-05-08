@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import "./watch.scss";
 import { useState } from "react";
 import axios from "axios";
-import ReactPlayer from 'react-player'
 
 export default function Watch() {
   // const location = useLocation();

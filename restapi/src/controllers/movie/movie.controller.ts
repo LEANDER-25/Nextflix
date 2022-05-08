@@ -46,6 +46,9 @@ export class MovieController {
       if (error.name === 'NotFoundError' || error == NotFoundError) {
         throw new HttpException(`${error.message}`, HttpStatus.BAD_REQUEST);
       }
+      if (error.code === 11000) {
+        throw new HttpException(`Movie Conflict`, HttpStatus.CONFLICT);
+      }
       throw new HttpException(
         'Error while creating new movie...',
         HttpStatus.INTERNAL_SERVER_ERROR,
